@@ -18,8 +18,7 @@ const bookSchema = new Schema<IBook>(
       required: true,
     },
     publicationDate: {
-      type: String,
-      required: true,
+      type: Date,
     },
     reviews: {
       type: [],
@@ -29,5 +28,15 @@ const bookSchema = new Schema<IBook>(
     timestamps: true,
   },
 );
+
+bookSchema.pre('save', async function (next) {
+  // const book = this;
+
+  if (!this.publicationDate) {
+    this.publicationDate = new Date();
+  }
+
+  next();
+});
 
 export const Book = model<IBook, BookModel>('Book', bookSchema);
