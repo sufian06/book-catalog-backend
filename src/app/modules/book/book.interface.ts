@@ -3,5 +3,7 @@ export type IBook = {
   author: string;
   genre: string;
   publicationDate?: Date;
+  image?: string;
+  descriptions?: string;
   reviews?: [];
 };
